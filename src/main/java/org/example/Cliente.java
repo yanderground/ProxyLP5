@@ -1,19 +1,41 @@
 package org.example;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Arrays;
+import java.util.List;
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+public class Cliente implements ICliente {
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+    private Integer id;
+    private String nome;
+    private String endereco;
+    private Float saldo;
+
+    public Cliente(int id) {
+        this.id = id;
+        Cliente objeto = BD.getCliente(id);
+        this.nome = objeto.nome;
+        this.endereco = objeto.endereco;
+        this.saldo = objeto.saldo;
+    }
+
+    public Cliente(Integer id, String nome, String endereco, Float saldo) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.saldo = saldo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public List<String> obterDadosPessoais() {
+        return Arrays.asList(this.nome, this.endereco);
+    }
+
+    @Override
+    public Float obterSaldo(Funcionario funcionario) {
+        return this.saldo;
     }
 }
